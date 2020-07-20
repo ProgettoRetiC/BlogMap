@@ -18,12 +18,12 @@ BlogMap utilizza :
 - Maps : Leaflet per fornire una visualizzazione su mappa dei luoghi trovati 
 - Calendar : Google Calendar per inserire o visualizzare eventi 
 - Facebook : Per autenticare l utente e condividere luoghi 
-- AMQP : Protocollo di messaging per la gestione richieste utente 
+- RabbitMQ : Protocollo di messaging per la gestione richieste utente 
 - CouchDB : Database dove salviamo le pianificazioni degli utenti 
 - Swagger : Per fornire le nostre API 
 
 # Installazione
-Per installare BlogMap è necessario clonare la repository 
+Per installare BlogMap è necessario clonare la repository e installare RabbitMQ e Couch-DB o usare container
 
 $ git clone https://github.com/ProgettoRetiC/BlogMap.git 
 $ npm install 
@@ -41,12 +41,12 @@ I test sono stati effettuati sulle funzioni di interazione con il database. Sono
 
 aggiornamento database di un utente
 prendere pianificazione di un utente
+
 I test sono stati svolti grazie al modulo Jest
 
-Per eseguire i test
+Per eseguire i test:
 
 $ npm run test
-E' possibile testare varie funzionalità del sito:
 
-
+# API REST
 
