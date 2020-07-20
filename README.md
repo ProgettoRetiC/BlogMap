@@ -14,13 +14,13 @@ Gli eventi creati dall utente inoltre saranno salvati in un database(nel nostro 
 Il front-end è si avvale di diversi file ejs per rendere dinamica le pagina HTML,inoltre tramite file javascript,bootsrap e stili css rendiamo la visulazzazione delle pagine confortevole e intuitiva e dinamica.Per usufruire della mappa di leaflet usiamo anche css presi da cnd server.
 
 BlogMap utilizza : 
-- NodeJS : I/O ad eventi per la gestione del back end 
-- Maps : Leaflet per fornire una visualizzazione su mappa dei luoghi trovati 
-- Calendar : Google Calendar per inserire o visualizzare eventi 
-- Facebook : Per autenticare l utente e condividere luoghi 
-- RabbitMQ : Protocollo di messaging per la gestione richieste utente 
-- CouchDB : Database dove salviamo le pianificazioni degli utenti 
-- Swagger : Per fornire le nostre API 
+* NodeJS : I/O ad eventi per la gestione del back end 
+* Maps : Leaflet per fornire una visualizzazione su mappa dei luoghi trovati 
+* Calendar : Google Calendar per inserire o visualizzare eventi 
+* Facebook : Per autenticare l utente e condividere luoghi 
+* RabbitMQ : Protocollo di messaging per la gestione richieste utente 
+* CouchDB : Database dove salviamo le pianificazioni degli utenti 
+* Swagger : Per fornire le nostre API 
 
 # Installazione
 Per installare BlogMap è necessario clonare la repository e installare RabbitMQ e Couch-DB o usare container
@@ -51,7 +51,7 @@ $ npm run test
 # API REST
 Forniamo le seguenti API:
 
--GET /api/pianificazione/{clientId}
+* GET /api/pianificazione/{clientId}
 ritorna la pianificazione dell utente
--GET /api/mappa/{indirizzo}/{citta}/{categoria}/{type}/{sorting}
+* GET /api/mappa/{indirizzo}/{citta}/{categoria}/{type}/{sorting}
 ritorna i luoghi risultati dalla ricerca effettuata con le relative specifiche passate
