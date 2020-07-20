@@ -51,7 +51,7 @@ $ npm run test
 # API REST
 Forniamo le seguenti API:
 
-* GET /api/pianificazione/{clientId}
+* GET /api/pianificazione/{clientId} \
 ritorna la pianificazione dell utente
-* GET /api/mappa/{indirizzo}/{citta}/{categoria}/{type}/{sorting}
+* GET /api/mappa/{indirizzo}/{citta}/{categoria}/{type}/{sorting} \
 ritorna i luoghi risultati dalla ricerca effettuata con le relative specifiche passate
