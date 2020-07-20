@@ -1,0 +1,95 @@
+{
+    "swagger": "2.0",
+    "info": {
+       "description": "API che forniscono l'accesso alle funzioni di BlogMap",
+       "version": "1.0.0",
+       "title": "BlogMap API",
+       "contact": {
+          "email": "blogmapcreators@gmail.com"
+       },
+       "license": {
+          "name": "Apache 2.0",
+          "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+       }
+    },
+    "host" : "localhost:4000",
+    "basePath" : "/",
+    "schemes" : [ "http" ],
+    "paths": {
+       "/api/pianificazione/{clientId}": {
+          "get": {
+             "summary": "ritorna tutti i documenti di un utente relativi alla pianificazione",
+             "produces": [
+                "application/json"
+             ],
+             "parameters": [
+                {
+                   "in": "path",
+                   "name": "clientId",
+                   "description": "id dell utente",
+                   "required": true,
+                   "type": "string"
+                }
+             ],
+             "responses": {
+                "200": {
+                   "description": "Piano dell utente ritornato"
+                },
+                "404": {
+                   "description": "Piano non trovato"
+                }
+             }
+          }
+        },
+        "/api/mappa/{indirizzo}/{citta}/{categoria}/{type}/{sorting}": {
+            "get": {
+               "summary": "ritorna i 5 posti migliori secondo le specifiche che gli vengono passate",
+               "parameters": [
+                  {
+                     "in": "path",
+                     "name": "Indirizzo",
+                     "description": "indirizzo della ricerca",
+                     "required": true,
+                     "type": "string"
+                  },
+                  {
+                      "in": "path",
+                      "name": "Citta",
+                      "description": "Città della ricerca",
+                      "required": true,
+                      "type": "string"
+                   },
+                   {
+                      "in": "path",
+                      "name": "Categoria",
+                      "description": "Categoria della ricerca",
+                      "required": true,
+                      "type": "string"
+                   },
+                   {
+                      "in": "path",
+                      "name": "Tipologia",
+                      "description": "Tipologia della ricerca",
+                      "required": true,
+                      "type": "string"
+                   },
+                   {
+                    "in": "path",
+                    "name": "Sorting",
+                    "description": "Sorting della ricerca",
+                    "required": true,
+                    "type": "string"
+                 }
+               ],
+               "responses": {
+                  "200": {
+                     "description": "Ricerca ottenuta con successo"
+                  },
+                  "400": {
+                     "description": "Specifiche errate"
+                  }
+               }
+            }
+          }
+    }
+ }
