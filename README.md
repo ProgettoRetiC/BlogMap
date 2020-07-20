@@ -25,16 +25,16 @@ BlogMap utilizza :
 # Installazione
 Per installare BlogMap è necessario clonare la repository 
 
-$ git clone https://github.com/wupper98/rdc.git 
+$ git clone https://github.com/ProgettoRetiC/BlogMap.git 
 $ npm install 
 
 # Come eseguire l applicazione
 Per eseguire BlogMap eseguire il comando:
 
-$ npm start\
+$ npm start
 Se si è su una piattaforma windows potrebbe essere necessario avviare separatamente il serverRPC:
 
-$ node ./serverRPC.js\
+$ node ./serverRPC.js
 
 # Test
 I test sono stati effettuati sulle funzioni di interazione con il database. Sono state testate le seguenti funzionalità:
