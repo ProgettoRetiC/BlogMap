@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BlogMap - Accedi</title>
+
+        <!-- Meta -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+        <link href="css/signin.css" rel="stylesheet" type="text/css">
+        
+
+        <!-- CSS -->
+        <link  href="css/stili-custom.css" rel="stylesheet" type="text/css">
+        
+        <!-- Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/AccediJS.js"></script>
+
+        <!-- Font di Google e Facebook -->
+	    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    </head>
+    <header>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+            <a class="navbar-brand" href="" >BlogMap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                </ul>
+            </div>
+            <div>
+    
+            </div>
+        </nav>
+    </header>
+
+    <body class="text-center">
+
+        <!-- Sfondo -->
+        <div>
+            <img id="sfondoAccedi" src="Immagini/SfondoAccedi.jpg">
+        </div>
+
+        <!-- Alert di errore sinistro -->
+        <div class="container p-3 bg-danger" id="divErroreAcc">
+            <img src="Immagini/Punto.jpg" height=50 width=50></img>
+            <div id="ErroreAcc"></div>
+        </div>
+
+        <!-- Alert di errore destro -->
+        <div class="container p-3 bg-danger" id="divErroreAcc2">
+            <img src="Immagini/Punto.jpg" height=50 width=50></img>
+            <div id="ErroreAcc2"></div>
+        </div>
+    
+        <!-- card -->
+            <div class="card text-black bg-info mb-3 mx-auto" id="cardAccesso">
+            <div class="card-header">
+                <h2>Accedi</h2>
+            </div>
+            <div class="card-body">
+                <p> Per usufruire dei nostri servizi è necessario effettuare l'accesso sia con l'account Facebook che con Google </p>
+                <p> <%= errore %> </p> 
+                <div class="row">
+                    <div class="col">
+                        <% if(accessoFb=='Entra con Facebook'){ %>
+                            <div class="btn-group">
+                                <button class='btn btn-primary disabled'><i class="fa fa-facebook" style="width:16px; height:20px; color: white"></i></button>
+                                <button class='btn btn-primary' id="FBbutton" style="width:12em"> Accedi con Facebook</button>
+                            </div>	
+                        <% } else{ %>
+                            <div class="btn-group">
+                                <button class='btn btn-primary disabled'><i class="fa fa-facebook" style="width:16px; height:20px; color: white"></i></button>
+                                <button class='btn btn-primary' id="FBbutton" style="width:12em"> <%= accessoFb %> </button>
+                            </div>	
+                        <% } %>
+                    </div>
+                    <div class="col">
+                        <% if(accessoGG=='Entra con Google'){ %>
+                            <div class="btn-group">
+                                <button class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px; color: white"></i></button>
+                                <button class='btn btn-danger' id="GGbutton" style="width:12em"> Accedi con Google</button>
+                            </div>   
+                        <% } else{ %>
+                            <div class="btn-group">
+                                <button class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px; color: white"></i></button>
+                                <button class='btn btn-danger' id="GGbutton" style="width:12em"> <%= accessoGG %> </button>
+                            </div>  
+                        <% } %>
+                    </div>     
+                </div>       
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-bar bg-info text-center" id="footer1">
+            <div id="immagineFooter">
+                <img src="Immagini/Logo.jpg" id="Logo">
+                <br>
+                <label>&copy;Blogmap 2020</label>
+            </div>
+            
+    </body>
+    <script>
+        (function() {
+        document.getElementById('FBbutton').addEventListener('click', function() {
+            <% if(accessoFb=='Entra con Facebook'){ %>
+                window.location = 'http://localhost:4000/loginFB';
+            <% } %>
+        }, false);
+        document.getElementById('GGbutton').addEventListener('click', function() {
+            <% if(accessoGG=='Entra con Google'){ %>
+                window.location = 'http://localhost:4000/loginGG';
+            <% } %>
+        }, false);
+        })();
+    </script>
+</html>

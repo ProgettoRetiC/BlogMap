@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BlogMap - Home</title>
+
+        <!-- Meta -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+
+        <!-- CSS -->
+        <link  href="css/stili-custom.css" rel="stylesheet" type="text/css"/>
+
+        <!-- Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/funzioni.js"></script>
+
+    </head>
+    <header>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+            <a class="navbar-brand" href="http://localhost:4000/Home">BlogMap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/Home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/miopiano">Pianificazione <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col" id="FotoProfilo">
+                        <img src="<%= Foto %>" width="40px"></img>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" style="width: 200px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"><span class="caret"></span><%= Nome %> <%= Cognome %></button>
+                            <ul class="dropdown-menu" style="width: 200px;">
+                                <li><a href="http://localhost:4000/logout">Esci</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body class="text-center">
+        <!-- Immagini di sfondo -->
+        <div class="fadein">
+            <img class="immag" src="Immagini/Montagna.jpg">
+            <img class="immag" src="Immagini/Campagna.jpg">
+            <img class="immag" src="Immagini/Oceano.jpg">
+            <img class="immag" src="Immagini/Fiume.jpg">
+        </div>
+        
+        <!-- Form -->
+        <div id="card" class="card text-black bg-info mx-auto">
+            <div class="card-header">
+                <h2>Trova i posti vicino a te</h2>
+            </div>
+            <div class="card-body">
+                <form name="form" action="http://localhost:4000/Mappa" method="POST">
+                    <div class="row" id="idRigaFormHome" name="rigaFormHome">
+                        <div class="col">
+                            <div class="d-flex justify-content-start">
+                                <label for="inputIndirizzo">Indirizzo</label>
+                                <p><%notfound%></p>
+                            </div>
+                            <input type="text" id="Indirizzo" name="indirizzo" class="form-control" placeholder="Inserisci indirizzo" autofocus/>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-start">
+                                <label for="inputCitta">Città</label>
+                            </div>
+                            <input type="text" id="Citta" name="citta" class="form-control" placeholder="Inserisci citt&agrave;">
+                            <div class="verificaInputHome" id="erroreCitta">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="idRigaFromHome" name="rigaFromHome">
+                        <div class="col">
+                            <div class="d-flex justify-content-start">
+                                <label for="inputCategoria">Categoria</label>
+                            </div>
+                            <select id="categoria" name='categoria' class="form-control">
+                                <option value="ScegliCategoria" selected>Scegli la categoria
+                                <option value="cibo">Cibo
+                                <option value="cultura">Cultura
+                                <option value="culto">Luoghi di culto
+                                <option value="negozi">Negozi
+                                <option value="sanità">Sanità
+                                <option value="servizi">Servizi
+                                <option value="studio">Studio
+                                <option value="svago">Svago
+                            </select>
+                            <div class="verificaInputHome" id="erroreCategoria">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex justify-content-start">
+                                <label for="inputTipologia">Tipologia</label>
+                            </div>
+                            <select name="type" id="type" class="form-control" disabled>
+                                <option value="ScegliTipo" selected>Scegli la tipologia
+                            </select>
+                            <div class="verificaInputHome" id="erroreTipo">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" name="rigaFromHome">
+                        <div class="col">
+                            <input type="radio" id="migliori" name="sorting" value="Posti migliori">
+                            <label for="migliori">Posti migliori</label>
+                            <input type="radio" id="vicini" name="sorting" value="Posti più vicini">
+                            <label for="vicini">Posti più vicini</label>
+                            <div class="verificaInputHome" id="erroreRadio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" name="Submit" id="submitForm" class="btn btn-success my-2 mr-sm-2" value="Invia">Cerca</button>
+                        <button class="btn btn-success my-2 mr-sm-2" id="resetForm" type="reset">Resetta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-bar bg-info" id="footer1">
+            <div id="immagineFooter">
+                <img src="Immagini/Logo.jpg" id="Logo">
+                <br>
+                <label>&copy;Blogmap 2020</label>
+            </div>
+            <div id="linkFooter">
+                <a href="http://localhost:4000/Chi_siamo" style="color: white;">Chi siamo</a>
+                <br>
+                <a href="http://localhost:4000/Contattaci" style="color: white;">Contattaci</a>
+                <br>
+                <a href="http://localhost:4000/FAQ" style="color: white;">FAQ</a>
+            </div>
+        </div>
+    </body>
+</html>

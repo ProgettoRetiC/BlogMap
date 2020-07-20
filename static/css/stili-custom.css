@@ -1,0 +1,455 @@
+/* Navbar */
+#navbar{
+    height: 70px;
+}
+
+#FotoProfilo{
+    position: relative;
+    left: 20px;
+}
+
+/* Accedi */
+#cardAccesso{
+    position: relative; 
+    bottom: 50px; 
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
+#sfondoAccedi{
+    position: absolute; 
+    left:0;
+    top:0; 
+    width: 100%;
+}
+
+#divErroreAcc{
+    position: absolute; 
+    top: 100px; 
+    left: 20px; 
+    width: 20%; 
+    display:none; 
+    border-top-left-radius: 20px; 
+    border-top-right-radius: 20px; 
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 20px;
+}
+
+#divErroreAcc2{
+    position: absolute; 
+    top: 100px; 
+    right:20px; 
+    width: 20%; 
+    display:none; 
+    border-top-left-radius: 20px; 
+    border-top-right-radius: 20px; 
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 20px;
+}
+
+
+/* Footer delle pagine statiche */
+#footer1{
+    position: fixed;
+    left: 0;
+    height: 160px;
+    bottom: 0;
+    width: 100%;
+    color: white;
+}
+
+#immagineFooter{
+    position: relative;
+    right: 650px;
+    top: 20px;
+}
+
+#linkFooter{
+    position: relative;
+    bottom: 95px;
+    left: 625px;
+}
+
+#Logo{
+    height: 100px;
+    width: 100px;
+}
+
+
+/* Footer delle pagine scorrevoli */
+#footer2{
+    position: relative;
+    left: 0;
+    height: 160px;
+    width: 100%;
+    bottom: 0;
+    color: white;
+    margin-top: 20px;
+}
+
+#immagineFooter2{
+    position: relative;
+    right: 640px;
+    top: 20px;
+}
+
+#linkFooter2{
+    position: relative;
+    bottom: 95px;
+    left: 1290px;
+    max-width: 200px;
+}
+
+
+/* Home */
+#card{
+    position: absolute;
+    right: 100px;
+    bottom: 220px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 600px;
+}
+
+#migliori{
+    position: relative;
+    right: 10px;
+}
+
+#vicini{
+    position: relative;
+    left: 10px;
+}
+
+label[for='migliori']{
+    position: relative;
+    right: 10px;
+}
+
+label[for='vicini']{
+    position: relative;
+    left: 10px;
+}
+
+#erroreIndirizzo{
+    color: red;
+}
+
+#erroreCitta{
+    color: red;
+}
+
+#erroreCategoria{
+    color: red;
+}
+
+#labelErroreTipo{
+    color: red;
+}
+
+#erroreRadio{
+    color: red;
+}
+        
+.fadein img { position:absolute; left:0; top:0; padding-top:50px;}
+
+.immag{
+    width: 100%;
+}
+
+.verificaInputHome{
+    height: 25px;
+    color: crimson;
+}
+
+
+/* Mappa */
+#risultati{
+    text-align: left;
+    position: relative;
+    height: 250px;
+    width: 1000px;
+    margin-top: 20px;
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#titoloRisultati{
+    position: relative;
+    margin-top: 40 px;
+    color: white;
+}
+
+#mymap { 
+    margin-top: 100px;
+    margin-left:auto;
+    margin-right:auto;
+    height: 500px;
+    width: 1000px;
+}
+
+#ProprietaMappa{
+    position: relative;
+    top: 20px;
+}
+
+.imm{
+    position: relative;
+    right: 10px;
+    top: 20px;
+    height: 150px;
+}
+
+#sfondoMappa{
+    position: absolute; 
+    left:0; 
+    top:0; 
+    width: 100%; 
+    object-fit: cover;
+}
+
+
+/* Luogo */
+#bottoneAggiunta{
+    position: absolute;
+    top: 560px;
+    left: 330px;
+}
+#bottoneCondividi{
+    position: absolute;
+    top: 572px;
+    left: 590px;
+}
+#mymap2 { 
+    position: relative;
+    left: 300px;
+    top: 50px;
+    height: 350px;
+    width: 350px;
+}
+
+.Rece{
+    position: relative;
+    margin-top: 20px;
+}
+
+.Testo{
+    position: relative;
+    left: 55px;
+}
+
+#Slider{
+    position: relative;
+    margin-top: 20px;
+}
+
+#recensioniLuogo{
+    position: relative;
+    margin-top: 20px;
+}
+
+#nessunaRecLuogo{
+    position: relative;
+    margin-top: 20px;
+}
+
+#AccReg{
+    position: relative;
+    width: 1000px;
+    margin-top: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: orangered;
+}
+
+#rigaAccReg1{
+    position: relative;
+    left: 300px;
+    max-width: 500px;
+}
+
+#rigaAccReg2{
+    position: relative;
+    left: 400px;
+    max-width: 200px;
+}
+
+#Luogo{
+    position: relative;
+    height: 640px;
+    width: 1200px;
+    margin-top: 100px;
+    color: white;
+    text-align: left;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.immRec{
+    position: relative;
+    height: 150px;
+}
+
+#sfondoLuogo{
+    position: absolute; 
+    left:0; 
+    top:0; 
+    width: 100%; 
+    object-fit: cover;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+
+/* Chi siamo */
+#chiSiamo1{
+    margin-top: 20px;
+    width: 90%;
+    position: relative;
+}
+
+#chiSiamo2{
+    margin-top: 20px;
+    width: 90%;
+    position: relative;
+}
+
+#chiSiamoContainer{
+    position: relative;
+    margin-top: 100px;
+    max-width: 95%;
+    border-style: groove;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-image: url('/../Immagini/Citta.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+ #Federico{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    left:150px;
+    position: relative;
+ }
+
+
+ #Francesco{
+    margin-bottom: 20px;
+     margin-top: 20px;
+     position: relative;
+     left: 75px;
+ }
+
+ .frasiChiSiamo{
+    font-family: Garamond;
+ }
+
+
+ /* Contattaci */
+ #titoloContattaci{
+     position: relative;
+     margin-top: 100px;
+     left: 100px;
+ }
+
+ #corpoContattaci{
+    position: relative;
+    margin-top: 20px;
+ }
+
+ #mymap3 { 
+    height: 300px;
+    width: 300px;
+}
+
+#mappaContattaci{
+    position: relative;
+    left: 100px;
+}
+
+#divCorpoContattaci{
+    position: relative;
+    width: 90%;
+    left: 100px;
+}
+
+#containerContatti{
+    position: relative;
+    width: 100%;
+    height: 465px;
+    bottom:25px;
+    background-color: whitesmoke;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#sfondoContatti{
+    position: absolute; 
+    left:0; 
+    top:0; 
+    width: 100%;
+}
+
+
+/* FAQ */
+#titoloFAQ{
+    color:red;
+    position: relative;
+    margin-top: 30px;
+} 
+
+#containerdomande{
+    margin-top: 50px;
+    margin-left: 20px;
+    margin-bottom :150px;
+}
+
+div[name*='rigaFAQ']{
+    margin-top: 10px;
+    width: 90%;
+    position: relative;
+}
+
+#containertitoloFAQ{
+    margin-top: 10px;
+    width: 90%;
+    position: relative;
+
+}
+
+#sfondoFAQ{
+    position: absolute; 
+    left:0; 
+    top:0; 
+    width: 100%; 
+    size:cover
+}

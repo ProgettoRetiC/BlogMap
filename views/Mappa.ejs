@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BlogMap - Mappa</title>
+
+        <!-- Meta -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+
+        <!-- CSS -->
+        <link  href="css/stili-custom.css" rel="stylesheet" type="text/css">
+
+        <!-- CSS Leaflet -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+        <!-- Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/MappaJS.js"></script>
+
+    </head>
+
+    /* Menù */
+    <header>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+            <a class="navbar-brand" href="http://localhost:4000/Home">BlogMap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/Home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/miopiano">Pianificazione <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col" id="FotoProfilo">
+                        <img src="<%= FotoProfilo %>" width="40px"></img>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" style="width: 200px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"><span class="caret"></span><%= NomeProfilo %> <%= Cognome %></button>
+                            <ul class="dropdown-menu" style="width: 200px;">
+                                <li><a href="http://localhost:4000/logout">Esci</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body class="text-center">
+            
+                <div>
+                    <img id='sfondoMappa' src='Immagini/Prova.jpg'>
+                </div>
+                    <div>
+                    <div id='mymap'> </div>
+                    <script>
+                        var map = L.map('mymap').setView([<%=lat%>,<%=lon%>], 16);
+                        var OSM_layer =L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                        {attribution: '&copy;<a href="http://osm.org/copyright">OpenStreetMap</a>'}).addTo(map);
+                        var marker = L.marker([<%=lat%>,<%=lon%>]).addTo(map);
+                        <% for(var i=1;i<6;i++){%> 
+                        var pin_red<%=i;%> = L.icon({
+                        iconUrl: 'Immagini/Marker<%=i;%>.png',
+                        iconSize: [40, 40],
+                         });
+                        var marker<%=i;%>=L.marker([<%=posti[i-1][2];%>,<%=posti[i-1][3];%>], {icon: pin_red<%=i;%>}).addTo(map);
+                         <%}%>
+                        
+                    </script>
+                         </div>
+                           <% if(posti[0][0]!=""){%>
+                                <div>
+                                    <h2 id='titoloRisultati'>Risultati</h2>
+                                </div>
+                                <% for(i=0;i<5;i++){%>
+
+                                    <% if(typeof posti[i][0]!="undefined"){%>
+                                        <% if(posti[i][0]!=''){ %>
+                                            <div class="container bg-info" id="risultati">
+                                                <div class="d-flex justify-content-center">
+                                                    <img src="Immagini/Marker<%=i+1%>.png" height="35" width="35">
+                                                        <h3> <%=posti[i][0]%></h3>
+                                                </div>
+                                                        <div class="row">
+                                                            <div class="col" id="ProprietaMappa">
+                                                                <%=posti[i][4]%><br>
+                                                                Rating Google: <%=posti[i][1]%><br>
+                                                                Aperto ora: <%=posti[i][5]%><br>
+                                                                Distanza: <%=posti[i][9]%> km<br>
+                                                                <a href="http://localhost:4000/Luogo?nome=<%= posti[i][0] %>&rating=<%= posti[i][1] %>&lat=<%= posti[i][2] %>&lon=<%= posti[i][3] %>&via=<%= posti[i][4] %>&aperto=<%= posti[i][5] %>&apifoto=<%= posti[i][6] %>&foto=<%= posti[i][7] %>&place_id=<%= posti[i][10] %>" style="color: green;">Vai alla pagina</a>
+                                                            </div>
+                                                            <%if(typeof posti[i][6]!='undefined'){%>
+                                                                <div class="col">
+                                                                            <div class="d-flex justify-content-end">
+                                                                                <img class="imm" src="<%=posti[i][6]%>">
+                                                                            </div>
+                                                            <%}%>
+                                                            </div>
+                                                </div>
+                                            </div>
+                                        <% } else{ break; }%>
+                                    <%}%>
+                                <%}%>
+                           <% }else{ %>
+                                <div>
+                                    <h2 id='titoloRisultati'>Nessun risultato trovato</h2>
+                                </div>
+                            <%}%>
+
+                        </div>
+                        
+        
+        <!-- Footer -->
+        <div class="footer-bar bg-info" id="footer2">
+            <div id="immagineFooter2">
+                <img src="Immagini/Logo.jpg" id="Logo">
+                <br>
+                <label>&copy;Blogmap 2020</label>
+            </div>
+            <div id="linkFooter2">
+                <a href="http://localhost:4000/Chi_siamo" style="color: white;">Chi siamo</a>
+                <br>
+                <a href="http://localhost:4000/Contattaci" style="color: white;">Contattaci</a>
+                <br>
+                <a href="http://localhost:4000/FAQ" style="color: white;">FAQ</a>
+            </div>
+        </div>
+    </body>
+</html>

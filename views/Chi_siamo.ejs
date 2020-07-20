@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BlogMap - Chi siamo</title>
+
+        <!-- Meta -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+
+        <!-- CSS -->
+        <link  href="css/stili-custom.css" rel="stylesheet" type="text/css">
+
+        <!-- Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.bundle.js"></script>
+
+        <!-- Font di Facebook, Instagram e YouTube -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </head>
+
+    
+     <header>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+            <a class="navbar-brand" href="http://localhost:4000/Home">BlogMap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/Home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/miopiano">Pianificazione <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col" id="FotoProfilo">
+                        <img src="<%= Foto %>" width="40px"></img>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" style="width: 200px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"><span class="caret"></span><%= Nome %> <%= Cognome %></button>
+                            <ul class="dropdown-menu" style="width: 200px;">
+                                <li><a href="http://localhost:4000/logout">Esci</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body style="background-color: whitesmoke;">
+
+        <!-- Container contenente i tre sviluppatori del sito -->
+        <div class="container" id="chiSiamoContainer">
+            <div class="row">
+                <div class="col">
+                    <div class="container" id="Federico">
+                        <div class="card" style="width:400px">
+                            <img class="card-img-top" src="Immagini/Federico.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">Federico Ambrogio</h4>
+                                <p class="card-text">Studente di ingegneria informatica e automatica presso La Sapienza, nato a Roma il 19/11/1998.
+                                                     Appassionato di animazione, calcio e musica.</p>
+                                <a href="https://www.facebook.com/federico.ambrogio.96"><i class="fa fa-facebook">Facebook</i></a>
+                                <br>
+                                <a href="https://www.instagram.com/federico1198/?hl=it"><i class="fa fa-instagram">Instagram</i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container" id="Francesco">
+                        <div class="card" style="width:400px">
+                            <img class="card-img-top" src="Immagini/Francesco.jpg" height="530" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">Francesco Fè</h4>
+                                <p class="card-text">Studente di ingegneria informatica e automatica presso La Sapienza, nato a Roma il 10/09/1998.
+                                                     Appassionato di palestra e videogiochi.</p>
+                                <a href="https://www.facebook.com/francesco.fe.75"><i class="fa fa-facebook">Facebook</i></a>
+                                <br>
+                                <a href="https://www.instagram.com/frafe1098/?hl=it"><i class="fa fa-instagram">Instagram</i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Container contenente la prima domanda con risposta -->
+        <div class="container" id="chiSiamo1">
+            <b><h2>Cos'è BlogMap?</h2></b>
+            <h4 class="frasiChiSiamo">BlogMap nasce come idea per semplificare la ricerca dei migliori punti d'interesse accanto a te,
+            ed è stato progettato in modo da essere semplice ed intuitivo per permettere di compiere la scelta
+            più efficente dei locali nelle vicinanze.</h4>
+        </div>
+
+        <!-- Container contenente la seconda domanda con risposta -->
+        <div class="container" id="chiSiamo2">
+            <b><h2>Perchè dovrei usarlo?</h2></b>
+            <h4 class="frasiChiSiamo">Il suo design intuitivo lo rende facilmente utilizzabile ed accessibile ad ogni fascia d'età. BlogMap, inoltre, ordina 
+                efficentemente i luoghi desiderati per rating, così permettendo una ricerca rapida volta a snellire le numerose azioni che sarebbero normalmente 
+                richeste usando altri siti.</h4>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-bar bg-info" id="footer2">
+            <div id="immagineFooter2">
+                <img src="Immagini/Logo.jpg" id="Logo">
+                <br>
+                <label>&copy;Blogmap 2020</label>
+            </div>
+            <div id="linkFooter2">
+                <a href="http://localhost:4000/Chi_siamo" style="color: white;">Chi siamo</a>
+                <br>
+                <a href="http://localhost:4000/Contattaci" style="color: white;">Contattaci</a>
+                <br>
+                <a href="http://localhost:4000/FAQ" style="color: white;">FAQ</a>
+            </div>
+        </div>
+    </body>
+</html>

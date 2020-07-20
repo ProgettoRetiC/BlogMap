@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BlogMap - FAQ</title>
+
+        <!-- Meta -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+
+        <!-- CSS -->
+        <link  href="css/stili-custom.css" rel="stylesheet" type="text/css">
+        
+        <!-- Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/AccediJS.js"></script>
+        
+    </head> 
+
+    /* Menù */
+    <header>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+            <a class="navbar-brand" href="http://localhost:4000/Home">BlogMap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/Home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/miopiano">Pianificazione <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col" id="FotoProfilo">
+                        <img src="<%= Foto %>" width="40px"></img>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" style="width: 200px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"><span class="caret"></span><%= Nome %> <%= Cognome %></button>
+                            <ul class="dropdown-menu" style="width: 200px;">
+                                <li><a href="http://localhost:4000/logout">Esci</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <body>
+
+        <!-- Sfondo -->
+        <div>
+            <img id="sfondoFAQ" src="Immagini/sfondoFAQ.jpg">
+        </div>
+
+        <!-- Container principale -->
+        <div class="container" id="containerdomande">
+            <div class="row">
+                <div class=container id="containertitoloFAQ">
+                    <div id="titoloFAQ">
+                        <h1>FAQ</h1>
+                    </div>
+                </div>
+            </div>
+            <div class=row>
+                <div class="container" name="rigaFAQ">
+                    <b><h4 style="color:white">Come posso contattare gli svilippatori per segnalare eventuali bug?</h4></b>
+                    <h5 class="righeFAQ">Puoi contattarci all'email blogmapcreators@gmail.com.</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container" name="rigaFAQ">    
+                    <b><h4 style="color:white">Come faccio ad eliminare il mio account?</h4></b>            
+                    <h5 class="righeFAQ">Per poter eliminare il proprio account è necessario accedere, entrare nelle impostazioni e premere sul bottone elimina account.</h5>   
+                </div>
+            </div>
+            <div class="row">
+                <div class="container" name="rigaFAQ">
+                    <b><h4 style="color:white">Posso modificare le mie credenziali?</h4></b>
+                    <h5 class="righeFAQ">posso modificare le mie credenziali andando su impostazioni dopo aver effettuato l'accesso e successivamente cliccando sugli appositi bottoni di modifica.</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container" name="rigaFAQ">
+                    <b><h4 style="color:white">Non riesco a recensire un luogo che ho ricercato precedentemente.<h4></b>
+                    <h5 class="righeFAQ">Per recensire un luogo bisogna inizialmente ricercarlo attraverso l'apposita barra di ricerca. Successivamente bisogna accedere alla pagina del posto in questione cliccando sul bottone vai alla pagina. A questo punto non rimane che lasciare la propria recensione nella zona adibita ad essa.</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-bar bg-info text-center" id="footer1">
+            <div id="immagineFooter">
+                <img src="Immagini/Logo.jpg" id="Logo">
+                <br>
+                <label>&copy;Blogmap 2020</label>
+            </div>
+            <div id="linkFooter">
+                <a href="http://localhost:4000/Chi_siamo" style="color: white;">Chi siamo</a>
+                <br>
+                <a href="http://localhost:4000/Contattaci" style="color: white;">Contattaci</a>
+                <br>
+                <a href="http://localhost:4000/FAQ" style="color: white;">FAQ</a>
+            </div>
+        </div>
+    </body>
+</html>
+
+

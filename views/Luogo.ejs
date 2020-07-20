@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BlogMap - Luogo</title>
+
+        <!-- Meta -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+
+        <!-- CSS -->
+        <link  href="css/stili-custom.css" rel="stylesheet" type="text/css">
+
+        <!-- CSS Leaflet -->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+        <!-- Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/bootstrap.bundle.js"></script>
+        <script type="text/javascript" lang="javascript" src="js/LuogoJS.js"></script>
+
+    </head>
+
+    <header>
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
+            <a class="navbar-brand" href="http://localhost:4000/Home">BlogMap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/Home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:4000/miopiano">Pianificazione <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col" id="FotoProfilo">
+                        <img src="<%= FotoProfilo %>" width="40px"></img>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-success dropdown-toggle" style="width: 200px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"><span class="caret"></span><%= NomeProfilo %> <%= Cognome %></button>
+                            <ul class="dropdown-menu" style="width: 200px;">
+                                <li><a href="http://localhost:4000/logout">Esci</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <body class="text-center">
+
+        <!-- Sfondo -->
+        <div>
+            <img id="sfondoLuogo" src="Immagini/SfondoLuogo.jpg">
+        </div>
+
+        /* Primo container con le informazioni del luogo */
+        <div class="container p-3 bg-info" id="Luogo">
+            <div class="d-flex justify-content-center">
+                <h3><%= Nome %></h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-4" id="ProprietaLuogo">
+                    <h4><%= Via %></h4><br>
+                    <h4>Telefono: <%= Telefono %></h4><br>
+                    <h4>Sito Web: <%= Sito %></h4><br>
+                    <h4>Rating Google: <%= Rating %></h4><br>
+                    <h4>Aperto ora: <%= Aperto %><h4><br>
+                    <% if(Foto!=0){ %>
+                        <img class="immRec" src="<%= Foto %>">
+                    <% } %>
+                </div>
+                <div class="col-sm-8">
+                    <div id="mymap2"> </div>
+                    <script>
+                        var map = L.map("mymap2").setView([<%= lat %>,<%=lon %>], 16);
+                        var OSM_layer =L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+                        {attribution: "&copy;<a href='http://osm.org/copyright'>OpenStreetMap</a>"}).addTo(map);
+                        var marker = L.marker([<%= lat %>,<%= lon %>]).addTo(map);
+                    </script>
+                </div>
+            </div>
+            <div id="bottoneAggiunta" class="text-center">
+                <button class="btn btn-success my-2 mr-sm-2" id="calendarioModalButton" type="button" data-toggle="modal" data-target="#calendario">Aggiungi alla pianificazione</button>
+            </div>
+            <div id='bottoneCondividi'>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v7.0&appId=559333891412354&autoLogAppEvents=1" nonce="MrTiKM70"></script>
+                <div class="fb-share-button" data-href="<%=Sito%>" data-layout="button_count"  data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Condividi</a></div>
+            </div>
+
+        </div>
+
+        <!-- Modal calendario -->
+        <div class="modal fade" id="calendario" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Aggiungi alla tua pianificazione</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="http://localhost:4000/AggiungiEvento?&luogo=<%=Nome%>&Via=<%=Via%>&Telefono=<%=Telefono%>&Rating=<%=Rating%>&Aperto=<%=Aperto%>&Sito=<%=Sito%>&lat=<%=lat%>&lon=<%=lon%>&ApiFoto=<%=ApiFoto%>&PhotoReference=<%=PhotoReference%>">
+                            <label>Quando vuoi andare?</label>
+                            <br>
+                            <input type="date" id="giorno" name="giorno">
+                            <input type="time" id="orario" name="orario">
+                            <button type="submit" id="prenotaButton" name="prenotaButtonName" class="btn btn-default bg-info" style="color: white;">Aggiungi</button>
+                        </form>
+                        <div class="row">
+                            <label id="controlloPrenotazione"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>    
+
+        <div class="d-flex justify-content-center" id="recensioniLuogo">
+            <h2>Ultime Recensioni <h2>
+        </div>
+
+   
+        <% if(Recensioni[0][0]==''){ %>
+            <div id="nessunaRecLuogo">
+                <h3>Non è ancora stata scritta alcuna recensione</h3>
+            </div>
+        <% } else{ for(var i=0; i<5; i++){ %>
+            <% if(Recensioni[i][0]!=''){ %>
+                <div class="Rece" style="text-align: left;">
+                    <div class="container p-3" style="background-color: orangered; width: 1000px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;">
+                        <div class="row">
+                            <div class="col">
+                                <label style="position: relative; left: 40px; ">Utente: <%= Recensioni[i][0] %></label>
+                            </div>
+                            <div class="col">
+                                <label style="position: relative; left: 240px;">Data: <%= Recensioni[i][1] %></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <textarea name="testo" class="Testo" cols=120 rows=10 maxlenght=15 wrap="physical" disabled><%= Recensioni[i][2] %></textarea>
+                        </div>
+                        <div class="row" style="position: relative; left: 50px;">
+                            <label>Valutazione</label>
+                            <% for(var k=1; k<=Recensioni[i][3]; k++){ %>
+                                <label for="Stella<%= k %>">
+                                    <img id="immagineStella<%= k %>" src="Immagini/Stella.png" width="30px" height="30px"/>
+                                </label>
+                            <% } %>
+                            <% for(var k; k<6; k++){ %>
+                                <label for="Stella<%= k %>">
+                                    <img id="immagineStella<%= k %>" src="Immagini/StellaVuota.png" width="30px" height="30px"/>
+                                </label>
+                            <% } %>
+                        </div>
+                    </div>
+                </div> 
+            <% } else{ break; } %>
+        <% } } %>
+
+        <!-- Footer -->
+        <div class="footer-bar bg-info" id="footer2">
+            <div id="immagineFooter2">
+                <img src="Immagini/Logo.jpg" id="Logo">
+                <br>
+                <label>&copy;Blogmap 2020</label>
+            </div>
+            <div id="linkFooter2">
+                <a href="http://localhost:4000/Chi_siamo" style="color: white;">Chi siamo</a>
+                <br>
+                <a href="http://localhost:4000/Contattaci" style="color: white;">Contattaci</a>
+                <br>
+                <a href="http://localhost:4000/FAQ" style="color: white;">FAQ</a>
+            </div>
+        </div>
+    </body>
+</html>
