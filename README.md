@@ -41,8 +41,8 @@ $ node ./serverRPC.js
 ## Test
 I test sono stati effettuati sulle funzioni di interazione con il database. Sono state testate le seguenti funzionalità:
 
-aggiornamento database di un utente
-prendere pianificazione di un utente
+* aggiornamento database di un utente
+* prendere pianificazione di un utente
 
 I test sono stati svolti grazie al modulo Jest
 
