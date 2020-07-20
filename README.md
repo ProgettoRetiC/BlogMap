@@ -34,7 +34,7 @@ Per eseguire BlogMap eseguire il comando:
 ```sh
 $ npm start
 ```
-Se si è su una piattaforma windows potrebbe essere necessario avviare separatamente il serverRPC:
+Se si è su una piattaforma windows è necessario avviare separatamente il serverRPC:
 ```sh
 $ node ./serverRPC.js
 ```
