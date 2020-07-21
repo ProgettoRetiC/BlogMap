@@ -43,7 +43,7 @@ $(document).ready(function(){
     $('#prenotaButton').click(function(){
         oggi = new Date();
         giorno = oggi.getDate();
-        mese = oggi.getMonth();
+        mese = oggi.getMonth()+1;
         anno = oggi.getYear();
         ora= oggi.getHours();
         minuti= oggi.getMinutes();
@@ -57,16 +57,16 @@ $(document).ready(function(){
         }
         data = $('#giorno').val().split('-');
         time=  $('#orario').val().split(':');
-        if(time[0]<ora && data[2]<=giorno || time[1]<minuti && time[0]<ora && data[2]<=giorno || time[1]>60 || time[0]>60){
+        if(time[0]<ora && data[2]<=giorno || time[1]<minuti && time[0]<ora && data[2]<=giorno ){
             $('#controlloPrenotazione').html('L orario inserito non è valido');
             return false;
         }
-        else if(data[0]>=anno && data[1]>=mese && data[2]>=giorno){
-            return true;
-        }
-        else{
+        else if(data[0]<anno || (data[0]==anno && data[1]<mese) || (data[0]==anno && data[1]==mese && data[2]<giorno)){
             $('#controlloPrenotazione').html('La data inserita non è valida');
             return false;
+        }
+        else{
+            return true;
         }
     })
 
