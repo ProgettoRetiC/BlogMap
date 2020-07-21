@@ -59,4 +59,5 @@ ritorna la pianificazione dell utente
 ```sh
  GET /api/mappa/{indirizzo}/{citta}/{categoria}/{type}/{sorting} 
 ```
-ritorna i luoghi risultati dalla ricerca effettuata con le relative specifiche passate
+ritorna i luoghi risultati dalla ricerca effettuata con le relative specifiche passate\
+Per una documentazione completa e per effetuare test andare su http://localhost:4000:5984/api-docs
