@@ -8,10 +8,10 @@ Il suo design intuitivo lo rende facilmente utilizzabile ed accessibile ad ogni 
 ## Tecnologie utilizzate
 BlogMap è diviso in due moduli: il back-end scritto in Node si occupa di gestire i dati, mentre il front-end scritto in ejs si occupa della visualizzazione.
 
-Il back-end usa richieste HTTP secondo il paradigma REST per comunicare con Google Places da cui legge i dati relativi alle specifiche immesse dall utente.Tramite AMQP utilizzato per rendere piu efficiente la ricerca ,restituisce i risultati ottenuti gestendo le diverse richieste da piu utenti.Da qui l'utente potrà inserire su google calendar degli eventi relativamente al luogo assegnato ,questo tramite l utilizzo di un token preso nella pagina iniziale di accesso dove l utente dovrà autenticarsi sia con google che con Facebook.Inoltre sempre grazie a questa autenticazione l utente potrà condividere con i suoi amici di Facebook la relativa notizia.
+Il back-end usa richieste HTTP secondo il paradigma REST per comunicare con Google Places da cui legge i dati relativi alle specifiche immesse dall utente.Tramite AMQP utilizzato per rendere piu efficiente la ricerca ,restituisce i risultati ottenuti gestendo le diverse richieste da piu utenti.Da qui l'utente potrà inserire su google calendar degli eventi relativamente al luogo cercato , tramite l utilizzo di un token preso nella pagina iniziale di accesso dove l utente dovrà autenticarsi sia con google che con Facebook.Inoltre l utente potrà condividere con i suoi amici di Facebook la relativa notizia.
 Gli eventi creati dall utente inoltre saranno salvati in un database(nel nostro caso couch-db istanziato su docker) in modo da poter vedere la propria pianificazione con l'orario,il posto e altre informazioni.
 
-Il front-end è si avvale di diversi file ejs per rendere dinamica le pagina HTML,inoltre tramite file javascript,bootsrap e stili css rendiamo la visulazzazione delle pagine confortevole e intuitiva e dinamica.Per usufruire della mappa di leaflet usiamo anche css presi da cnd server.
+Il front-end è si avvale di diversi file ejs per rendere dinamica le pagine HTML,inoltre tramite file javascript,bootsrap e stili css rendiamo la visulazzazione delle pagine confortevole e intuitiva e dinamica.Per usufruire della mappa di leaflet usiamo anche css presi da cnd server.
 
 BlogMap utilizza : 
 * NodeJS : I/O ad eventi per la gestione del back end 
