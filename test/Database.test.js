@@ -9,7 +9,7 @@ test('Verifica ottenimento documenti dal database', (done) => {
 });
 
 test('Verifica aggiornamento database', (done) => {
-  id= "a1973861559414420";
+  id= "1973861559414420";
   var piano={
     luogo:"AveBirra",
     rating: "4.7",
@@ -21,8 +21,9 @@ test('Verifica aggiornamento database', (done) => {
     sito:"https://www.instagram.com/avebirra/",
     data:"2020-07-22T23:35:00+02:00"
   }
-  return db.aggiornaDB(id,piano).then( (resp) => {
-    expect(resp).toBe('success');
+  return db.aggiornaDB(id,piano).then((resp) => {
+    expect(resp).toBe("success");
+    done();
   }).catch( (err) => { done(err) });
 });
 
