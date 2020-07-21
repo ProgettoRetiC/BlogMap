@@ -2,7 +2,7 @@ require('dotenv').config();
 var request = require('request');
 const { aggiornaDB } = require("./database");
 
-async function controllaEvento(res,req, token,luogo,aperto,sito,photoreference,rating,telefono,via, data,timezone,apifoto,lat,lon){
+function controllaEvento(res,req, token,luogo,aperto,sito,photoreference,rating,telefono,via, data,timezone,apifoto,lat,lon){
     //lista dove mettiamo orario e timezone di tutti gli eventi 
     var lista2=new Array();
 	var options={
@@ -24,8 +24,9 @@ async function controllaEvento(res,req, token,luogo,aperto,sito,photoreference,r
         	}
 			if(lista2.includes(data)){
 		      	console.log("Evento già aggiunto!!");
-		    }
-		      	aggiungiEvento(res,req,token,luogo,aperto,sito,photoreference,rating,telefono,via, data,timezone,apifoto,lat,lon);
+		    }else{
+                  aggiungiEvento(res,req,token,luogo,aperto,sito,photoreference,rating,telefono,via, data,timezone,apifoto,lat,lon);
+            }
 		    }
         }
     });
@@ -66,9 +67,17 @@ function aggiungiEvento(res,req,token,luogo,aperto,sito,photoreference,rating,te
                 sito:sito,
                 data:data,
             }
-            aggiornaDB(req,piano);
-            console.log('Aggiunta prenotazione a'+luogo);
-            res.render('Home.ejs',{notfound:'', Nome:  req.session.nome, Cognome: req.session.cognome, Foto: req.session.foto_profilo});
+            var id=req.session.id_client;
+            aggiornaDB(id,piano).then(() => {
+                console.log('Aggiunta prenotazione a '+luogo);
+                res.render('Home.ejs',{notfound:'', Nome:  req.session.nome, Cognome: req.session.cognome, Foto: req.session.foto_profilo});
+            }).catch(
+                function(err){
+                    console.log("Si è verificato un errore nella chiamata alla funzione aggiornaDB");
+                    console.log(err);
+                    res.send("Si è verificato un errore nella chiamata alla funzione aggiornaDB");
+                }
+            )
         }
     });
 }

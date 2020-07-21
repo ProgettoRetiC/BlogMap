@@ -2,11 +2,12 @@ const { prendiDB } = require("./database");
 require('dotenv').config();
 
 function Piano(req,res){
-    //prendiamo i piani dal database tramite una promise in formato json 
-    prendiDB(req).then(
+    //prendiamo i piani dal database tramite una promise in formato json
+    var id=req.session.id_client; 
+    prendiDB(id).then(
         function(resp){
-            var posti=[["",0,0,0,"","","","",0,0,0],["",0,0,0,"","","","",0,0,0],["",0,0,0,"","","","",0,0,0],["",0,0,0,"","","","",0,0,0],["",0,0,0,"","","","",0,0,0]];
-            console.log(resp.length);
+            //var posti=[["",0,0,0,"","","","",0,0,0],["",0,0,0,"","","","",0,0,0],["",0,0,0,"","","","",0,0,0],["",0,0,0,"","","","",0,0,0],["",0,0,0,"","","","",0,0,0]];
+            var posti=[["",0,0,0,"","","","",0,0,0,0,0,0,0,0],["",0,0,0,"","","","",0,0,0,0,0,0,0,0],["",0,0,0,"","","","",0,0,0,0,0,0,0,0],["",0,0,0,"","","","",0,0,0,0,0,0,0,0],["",0,0,0,"","","","",0,0,0,0,0,0,0,0]];
             //creo array partendo da json
             for(k=0;k<resp.length;k++){
                 if(typeof resp[k]=='undefined')break;
@@ -34,8 +35,40 @@ function Piano(req,res){
                 }
                 posti[k][9]= (posti[k][9]).substring(0,10);
                 posti[k][10]=(resp[k].data).substring(11,16);
+                posti[k][11]=posti[k][9].split('-')[0];
+                posti[k][12]=posti[k][9].split('-')[1];
+                posti[k][13]=posti[k][9].split('-')[2];
+                posti[k][14]=posti[k][10].split(':')[0];
+                posti[k][15]=posti[k][10].split(':')[1];
             }
-            res.render('MioPiano.ejs',{posti:posti, NomeProfilo:  req.session.nome, Cognome: req.session.cognome, FotoProfilo: req.session.foto_profilo});
+             var posti2 = posti.sort(function(a, b) {
+                if (a[13] == b[13] && a[12] == b[12] && a[14] == b[14] && a[11] == b[11] ) {
+                return a[15] - b[15];
+                }
+                else if(a[13] == b[13] && a[12] == b[12] && a[11] == b[11]){
+                    return a[14] - b[14];
+                }
+                else if( a[12] == b[12] && a[11] == b[11]){
+                    return a[13] - b[13];
+                }
+                else if(a[11] == b[11]){
+                    return a[12] - b[12];
+                }
+                else{
+                    return a[11] - b[11];
+                }
+            });
+            var tot=0;
+            for(i=0;i<5;i++){
+                if(posti[i][0]==''){
+                    posti2.splice(5,0,["",0,0,0,"","","","",0,0,0,0,0,0,0,0]);
+                    tot++;
+                }
+            }
+            for(i=0; i<tot; i++){
+                posti2.splice(0,1);
+            }
+            res.render('MioPiano.ejs',{posti:posti2, NomeProfilo:  req.session.nome, Cognome: req.session.cognome, FotoProfilo: req.session.foto_profilo});
         }).catch(
             function(err){
                 console.log("Si è verificato un errore nella chiamata alla pagina miopiano ");

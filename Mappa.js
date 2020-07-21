@@ -44,7 +44,7 @@ function prendiMappa(req,res){
                         lat:lat,
                         lon:lon
                     }
-                    rpc.gestisciPianificazione(mappa).then(
+                    rpc.gestisciRisultati(mappa).then(
                         function(resp){
                             console.log("Funzione eseguita con Successo!");
                             posti=resp.split('---');

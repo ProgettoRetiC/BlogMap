@@ -11,7 +11,7 @@ const { controllaEvento } = require("./Eventi");
 const { prendiMappa } = require("./Mappa");
 const { prendiLuogo } = require("./Luogo");
 
-//gestione della sessione
+//inizializza sessione
 app.use(expressSession({
     secret: 'Frafeffo',
     resave: false,
@@ -24,9 +24,10 @@ app.use(function(req,res,next) {
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
+//ora avremo su localhost:4000/api-docs documentazione e test delle nostre api descritte nel json
 app.use('/api-docs',swaggerUI.serve ,swaggerUI.setup(swaggerDocument));
 
+//cosi possiamo fornire le nostre api definite in swagger.json
 var apiController = require('./apiService');
 app.use('/api', apiController);
 
@@ -48,10 +49,12 @@ var scopeCal='https://www.googleapis.com/auth/calendar';
 var scopeCal2="https://www.googleapis.com/auth/calendar.events";
 var GGlogin="https://accounts.google.com/o/oauth2/v2/auth?client_id="+GGappId+"&scope="+scopeCal+" "+scopeCal2+"&response_type=code&redirect_uri=http://localhost:4000/tokenGG";
 
+//pagina iniziale
 app.get('/', function(req, res) {
     res.render('Accedi.ejs',{accessoFb: "Entra con Facebook", accessoGG: "Entra con Google",errore:""});
 });
 app.get('/Home', function(req, res) {
+    //prendo nome,cognome e foto da facebook e li salvo nelle variabili di sessione
     request({
         url: "https://graph.facebook.com/me?fields=id,first_name,last_name,picture&access_token="+req.session.FBtoken,
         method: 'GET',
@@ -70,12 +73,10 @@ app.get('/Home', function(req, res) {
         }
     })
 });
+//pagina contattaci
 app.get('/Contattaci', function(req, res) {
     res.render('Contattaci.ejs',{ NomeProfilo:  req.session.nome, Cognome: req.session.cognome, FotoProfilo: req.session.foto_profilo});
 });
-app.get('/post',function(req,res){
-    res.render('post.ejs',{appId:process.env.APPIDFB});
-})
 app.get('/Chi_siamo', function(req, res) {
     var names = 'franco';
     res.render('Chi_siamo.ejs', { Nome:  req.session.nome, Cognome: req.session.cognome, Foto: req.session.foto_profilo});
@@ -95,7 +96,7 @@ app.get("/loginGG", function(req, res){
         res.render('Accedi.ejs',{accessoFb: "Entra con Facebook",accessoGG: "Accesso Effettuato", errore:"",});
     }
 });
-//èrendiamo token google
+//prendiamo token google mediante codice di autorizzazione che abbiamo preso 
 app.get("/tokenGG", function(req, res){
     //andato a buon fine
     if (req.query.code){
@@ -108,6 +109,7 @@ app.get("/tokenGG", function(req, res){
                 console.log("ERRORE: Fallita la richiesta del token google: "+errore);
             }
             else{
+                //in body.scope ho il numero dei permessi di google
                 var info=JSON.parse(body);
                 if(info.scope.length<1)
                 {
@@ -120,6 +122,7 @@ app.get("/tokenGG", function(req, res){
                         res.render('Accedi.ejs',{accessoFb: "Accesso Effettuato", accessoGG: "Entra con Google", errore:"ERRORE: sono necessari tutti i permessi richiesti"});
                 }
                 else{
+                    //ho tutti i permessi
                     req.session.GGtoken = info.access_token;
                     console.log("Permessi garantiti");
                     if(req.session.FBtoken!=null)
@@ -180,7 +183,7 @@ app.get("/token", function(req, res){
                         var count=0;
                         if(data!=undefined){
                             for(i=0;i<data.length;i++){
-                                if(data[i].status!="declined"){
+                                if(data[i].status!="declined"){//se declinede non ho il permesso
                                     count++;
                                 } 
                             }
@@ -215,20 +218,6 @@ app.get("/token", function(req, res){
         else
             res.render('Accedi.ejs',{accessoFb: "Entra con Facebook", accessoGG: "Accesso Effettuato", errore:""});
 	}
-});
-
-//condividi creando un post recensendo il luogo
-app.get('/postFB',function(req,res){
-    request({
-        url: "https://graph.facebook.com/{page-id}/feed??message=Hello Fans!&access_token="+req.session.FBtoken,
-        method: 'POST',
-    }, function(error, response, body){
-        if(error) {
-            console.log("ERRORE: Fallita prova di creazione post "+errore);
-        } else {
-            console.log("Creato post FB\n");
-        }
-    });
 });
 
 //gestione delle pagine mappa e luogo

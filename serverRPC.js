@@ -20,9 +20,9 @@ amqp.connect('amqp://localhost', function(error0, connection) {
         channel.consume(queue, function reply(msg) {
             var mappa=JSON.parse(msg.content.toString());
 
-            console.log("Ricevuta richiesta del piano con id: ");
+            console.log("Ricevuta richiesta del piano ");
 
-            var r=scaricaPianificazione(mappa);
+            var r=scaricaRisultati(mappa);
 
             channel.sendToQueue(msg.properties.replyTo,
                 Buffer.from(r.toString()), {
@@ -35,7 +35,7 @@ amqp.connect('amqp://localhost', function(error0, connection) {
 });
 
 var api_foto="AIzaSyATA6YIj6i7pZD-9hdx1vI5CQYEvvobYwo";
-function scaricaPianificazione(mappa){
+function scaricaRisultati(mappa){
     resp2=mappa.resp2;
     lat=mappa.lat;
     lon=mappa.lon;

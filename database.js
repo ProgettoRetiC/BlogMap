@@ -1,44 +1,44 @@
 require('dotenv').config();
 var request = require('request');
-var TEST=process.env.TEST;
 
-function aggiornaDB(req,piano){
+function aggiornaDB(id,piano){
     return new Promise((resolve,reject) => {
         //vedo se l'utente ha un proprio database
         request({
-            url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client,
+            url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id,
             methond: 'HEAD'
         }, function(error,response,body){
                 if(response.statusCode==404){
                 //database non esistente --> lo creo 
                 request({
-                    url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client,
+                    url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id,
                     method: 'PUT',
                 },function(error,response,body){
-                    if(response.statusCode!=200){
-                        console.log("Errore nella creazione database");
+                    if(response.statusCode!=201 && response.statusCode!=200){
+                        reject(error);
                     } else{
-                        req.session.database=req.session.id_client;
                         console.log("Creato il database dell'utente");}
                         //vedo se il mio documento è presente nel db
                         request({
-                            url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client+"/"+piano.luogo,
+                            url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id+"/"+piano.luogo,
                             methond: 'GET',
                             json: true,
                         }, function(error,response,body){
                             if(response.statusCode==404){
                                 //doc non esistente --> lo creo
                                 request({
-                                    url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client+"/"+piano.luogo,
+                                    url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id+"/"+piano.luogo,
                                     method: 'PUT',
                                     body: {piano: piano},
                                     json: true,
                                 },function(error,response,body){
-                                    if(response.statusCode!=200){
-                                        console.log(error);
+                                    if(response.statusCode!=201 && response.statusCode!=200){
+                                        reject(error);
                                     } else{
                                         console.log("Documento aggiunto al database");
-                                        return "Success";
+                                        setTimeout(function() {
+                                            resolve("success");
+                                        }, 500);
                                     }
                                 });
                             } 
@@ -46,44 +46,46 @@ function aggiornaDB(req,piano){
                                 console.log("doc esistente");
                                 //aggiorno il doc esistente
                                 request({
-                                    url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client+"/"+piano.luogo,
+                                    url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id+"/"+piano.luogo,
                                     method: 'PUT',
                                     body: {_rev:body._rev, piano:piano},
                                     json: true,
                                 },function(error,response,body){
-                                    if(response.statusCode!=200){
-                                        console.log(error);
+                                    if(response.statusCode!=201 && response.statusCode!=200){
+                                        reject(error);
                                     } else{
                                         console.log("Aggiornato documento");
-                                        req.session.caricato=true;
-                                        return "Success";
+                                        setTimeout(function() {
+                                            resolve("success");
+                                        }, 500);
                                     }
                                 }); 
                             }
                         });
                 });
-                return "Success";
                 }else{
                     console.log("database esistente");
                     //vedo se il mio documento è presente nel db
                     request({
-                        url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client+"/"+piano.luogo,
+                        url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id+"/"+piano.luogo,
                         methond: 'GET',
                         json: true
                     }, function(error,response,body){
                         if(response.statusCode==404){
                             //documento non esistente --> lo creo
                             request({
-                                url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client+"/"+piano.luogo,
+                                url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id+"/"+piano.luogo,
                                 method: 'PUT',
                                 body: {piano: piano},
                                 json: true,
                             },function(error,response,body){
-                                if(response.statusCode!=200){
-                                    console.log(error);
+                                if(response.statusCode!=201 && response.statusCode!=200){
+                                    reject(error);
                                 } else{
                                     console.log("Aggiunto al database");
-                                    return "Success";
+                                    setTimeout(function() {
+                                        resolve("success");
+                                    }, 500);
                                 }
                             });
                         } 
@@ -91,16 +93,19 @@ function aggiornaDB(req,piano){
                             console.log("doc esistente");
                             //aggiorno il doc esistente
                             request({
-                                url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client+"/"+piano.luogo,
+                                url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id+"/"+piano.luogo,
                                 method: 'PUT',
                                 body: {_rev:body._rev, piano:piano},
                                 json: true,
                             },function(error,response,body){
-                                if(response.statusCode!=200){
-                                    console.log(error);
+                                if(response.statusCode!=201 && response.statusCode!=200){
+                                    console.log(response.statusCode);
+                                    reject(error);
                                 } else{
                                     console.log("Aggiornato database");
-                                    return "Success";
+                                    setTimeout(function() {
+                                        resolve("success");
+                                    }, 500);
                                 }
                             }); 
                         }
@@ -110,43 +115,37 @@ function aggiornaDB(req,piano){
         });
 }
 
-function prendiDB(req){
+function prendiDB(id){
     return new Promise((resolve,reject) => {
         //vedo se l'utente ha un proprio database
-        if(TEST) console.log("Verifico se esiste database di:");
         request({
-            url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client,
+            url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id,
             methond: 'HEAD',
         }, function(error,response,body){
             if(response.statusCode==404){
                 //database non esistente esco
-                if(TEST) console.log("Database non esistente");
                 reject(error);
             }else{
             var piani=[];
-            if(TEST) console.log("Prendo documenti dell utente");
                 request({
-                    url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client+"/_all_docs",
+                    url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id+"/_all_docs",
                     methond: 'GET',
                     json: true
                 }, function(error,response,body){
-                    if(response.statusCode!=200){
+                    if(response.statusCode!=201 && response.statusCode!=200){
                         //doc non esistente 
-                        if(TEST) console.log("Documenti non trovati");
                         reject(error);
                     }else{
                         var rows=body.rows;
                         for(i=0;i<body.total_rows;i++){//itero per tutti i documenti presenti nel proprio database
                             request({
-                                url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+req.session.id_client+"/"+rows[i].id,
+                                url: "http://admin:"+process.env.PASSDB+"@192.168.99.100:5984/a"+id+"/"+rows[i].id,
                                 method: 'GET',
                                 json: true,
                             },function(error,response,body){
-                                if(response.statusCode!=200){
-                                    if(TEST) console.log("impossibile prendere documenti");
+                                if(response.statusCode!=201 && response.statusCode!=200){
                                     reject(error);
                                 } else{
-                                    if(TEST) console.log("Documenti presi");
                                     console.log("Documento preso dal database");
                                     piani.push(body.piano);
                                 }
@@ -179,7 +178,7 @@ function prendiDBApi(req){
                     methond: 'GET',
                     json: true
                 }, function(error,response,body){
-                    if(response.statusCode!=200){
+                    if(response.statusCode!=201 && response.statusCode!=200){
                         //doc non esistente 
                         reject(error);
                     }else{
@@ -190,7 +189,7 @@ function prendiDBApi(req){
                                 method: 'GET',
                                 json: true,
                             },function(error,response,body){
-                                if(response.statusCode!=200){
+                                if(response.statusCode!=201 && response.statusCode!=200){
                                     reject(error);
                                 } else{
                                     console.log("Documento preso dal database");
