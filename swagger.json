@@ -33,10 +33,10 @@
              ],
              "responses": {
                 "200": {
-                   "description": "Piano dell utente ritornato"
+                   "description": "Success"
                 },
                 "404": {
-                   "description": "Piano non trovato"
+                   "description": "Not Success"
                 }
              }
           }
